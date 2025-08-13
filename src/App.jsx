@@ -1,34 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import Contacts from './components/Contacts';
+import ContactViewDetail from './components/ContactViewDetail';
+import CreateContact from './components/AddContact';
+import UpdateContact from './components/UpdateContact';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function ContactManagerApp() {
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+        <div className="container justify-content-center">
+          <div className="navbar-nav">
+            <Link to="/" className="nav-link px-3 fw-bold text-light">Home</Link>
+            <Link to="/add" className="nav-link px-3 fw-bold text-light">Add Contact</Link>
+          </div>
+        </div>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Contacts />} />
+        <Route path="/view/:id" element={<ContactViewDetail />} />
+        <Route path="/add" element={<CreateContact />} />
+        <Route path="/update/:id" element={<UpdateContact />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default ContactManagerApp;
